@@ -30,6 +30,7 @@ class FileStorage():
             with open(self.__file_path, "r") as file:
                 data = json.load(file)
             for k in data:
+                from models.base_model import BaseModel
                 self.__objects[k] = BaseModel(**data[k])
         except FileNotFoundError:
             pass
