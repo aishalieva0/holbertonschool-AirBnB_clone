@@ -20,6 +20,7 @@ class FileStorage():
         self.__objects[obj.__class__.__name__] = obj
 
     def save(self):
+
         with open(self.__file_path, "w") as file:
             json.dump(self.__objects, file)
 
