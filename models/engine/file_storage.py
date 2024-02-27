@@ -6,6 +6,7 @@ and deserializes JSON file to instances
 
 
 import json
+from models.base_model import BaseModel
 
 
 class FileStorage():
@@ -21,7 +22,6 @@ class FileStorage():
 
     def save(self):
         obj_dict = {key: obj.to_dict() for key, obj in FileStorage.__objects.items()}
-        print(obj_dict)
         with open(self.__file_path, "w") as file:
             json.dump(obj_dict, file)
 
@@ -29,5 +29,7 @@ class FileStorage():
         try:
             with open(self.__file_path, "r") as file:
                 self.__objects = json.load(file)
+            for k in self.__objects:
+                self.__objects[k] = BaseModel(**self.__objects[k])
         except FileNotFoundError:
             pass
