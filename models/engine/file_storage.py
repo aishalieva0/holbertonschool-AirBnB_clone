@@ -26,10 +26,8 @@ class FileStorage():
             json.dump(obj_dict, file)
 
     def reload(self):
-        data = {} 
         try:
             with open(self.__file_path, "r") as file:
-                data = json.load(file)
-            FileStorage.__objects = data
+                self.__objects = json.load(file)
         except FileNotFoundError:
             pass
