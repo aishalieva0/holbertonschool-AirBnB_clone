@@ -28,8 +28,8 @@ class FileStorage():
     def reload(self):
         try:
             with open(self.__file_path, "r") as file:
-                self.__objects = json.load(file)
-            for k in self.__objects:
-                self.__objects[k] = BaseModel(**self.__objects[k])
+                data = json.load(file)
+            for k in data:
+                self.__objects[k] = BaseModel(**data[k])
         except FileNotFoundError:
             pass
