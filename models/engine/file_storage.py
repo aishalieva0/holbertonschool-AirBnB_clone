@@ -29,7 +29,7 @@ class FileStorage():
         try:
             with open(self.__file_path, "r") as file:
                 data = json.load(file)
-            for k, v in data.items():
-                self.__objects[k] = BaseModel(**v)
+            for k in data:
+                self.__objects[k] = BaseModel(**data[k])
         except FileNotFoundError:
             pass
