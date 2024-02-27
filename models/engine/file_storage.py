@@ -33,6 +33,6 @@ class FileStorage():
                 class_name, obj_id = k.split('.')
                 if class_name in globals():
                     obj = globals()[class_name](**v)
-                    self.__objects[k] obj
+                    self.__objects[k] = obj
         except FileNotFoundError:
             pass
