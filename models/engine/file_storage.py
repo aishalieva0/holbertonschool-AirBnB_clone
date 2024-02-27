@@ -29,8 +29,10 @@ class FileStorage():
         try:
             with open(self.__file_path, "r") as file:
                 data = json.load(file)
-            for k in data:
-                from models.base_model import BaseModel
-                self.__objects[k] = BaseModel(**data[k])
+            for k, v in data.items():
+                class_name, obj_id = k.split('.')
+                if class_name in globals():
+                    obj = globals()[class_name](**v)
+                    self.__objects[k] obj
         except FileNotFoundError:
             pass
