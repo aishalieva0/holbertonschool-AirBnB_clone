@@ -1,7 +1,14 @@
 #!/usr/bin/python3
+"""
+this is console
+"""
+
+
 import cmd
 
+
 class HBNBCommand(cmd.Cmd):
+    """ commands """
     def do_quit(self, arg):
         return True
 
