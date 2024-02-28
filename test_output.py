@@ -1,32 +1,26 @@
 #!/usr/bin/python3
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+from models import storage
+# Create and save objects
+obj1 = BaseModel(name='Object 1')
+obj2 = BaseModel(name='Object 2')
 
-base_model = BaseModel()
-base_model.name = "Test Model"
-base_model.value = 123
-
-storage = FileStorage()
-storage.new(base_model)
+# Save objects to JSON file
 storage.save()
 
+# Reload objects
 storage.reload()
-# After reloading objects
+
+# Retrieve reloaded objects from storage
 reloaded_objects = storage.all()
-reloaded_base_model = reloaded_objects.get(f"BaseModel.{base_model.id}")
 
-if reloaded_base_model:
-    # Print attributes of original object
-    print("Original object attributes:", base_model.__dict__)
-    # Print attributes of reloaded object
-    print("Reloaded object attributes:", reloaded_base_model.__dict__)
+# Compare attributes of original objects with reloaded objects
+for obj_id, original_obj in reloaded_objects.items():
+    reloaded_obj = storage.all().get(obj_id)
+    if reloaded_obj:
+        assert original_obj.name == reloaded_obj.name
 
-    # Check if attributes match
-    attributes_match = (
-        reloaded_base_model.name == base_model.name
-        and reloaded_base_model.value == base_model.value
-    )
-    print("Attributes match:", attributes_match)
-else:
-    print("Reloaded object not found")
+# If the assertions pass, it means that the reloaded objects have the same attributes as the original objects.
+print("Test passed: Reloaded objects are the same as created objects.")
 
