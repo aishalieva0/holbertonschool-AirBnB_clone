@@ -17,6 +17,10 @@ class HBNBCommand(cmd.Cmd):
         """ end of file """
         return True
 
+    def do_help(self, arg):
+        """ help info """
+        cmd.Cmd.do_help(self, arg)
+
     cmd.Cmd.prompt = '(hbnb)'
 
     def emptyline(self):
