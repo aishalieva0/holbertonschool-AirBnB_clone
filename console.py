@@ -14,7 +14,7 @@ class HBNBCommand(cmd.Cmd):
         """ exit """
         return True
 
-    def EOF(self, arg):
+    def do_EOF(self, arg):
         """ end of file """
         return True
 
@@ -78,10 +78,30 @@ class HBNBCommand(cmd.Cmd):
         if not key in storage.all():
             print("** no instance found **")
             return 
-        for k, v in storage.all():
+        for k in storage.all():
             if (k == key):
                 del storage.all()[key]
                 storage.save()
+                return
+    def do_update(self, arg):
+        """Updates instance based on class name and id by adding"""
+        if len(arg) == 0:
+            print("** class name missing **")
+            return
+        args = arg.split()
+        try:
+            class_name = args[0] 
+            if class_name not in globals():
+                print("** class doesn't exist **")
+                return
+            key = class_name + "." + args[1]
+        except IndexError:
+            print("** instance id missing **")
+            return
+        if not key in storage.all():
+            print("** no instance found **")
+            return 
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
