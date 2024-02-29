@@ -14,7 +14,7 @@ class HBNBCommand(cmd.Cmd):
         """ exit """
         return True
 
-    def do_EOF(self, arg):
+    def EOF(self, arg):
         """ end of file """
         return True
 
@@ -58,10 +58,30 @@ class HBNBCommand(cmd.Cmd):
         if key in storage.all():
             print(storage.all()[key])
         else:
+            print("** no instance found **")           
+   
+    def do_destroy(self, arg):
+        """Deletes an instance based on the class name and id"""
+        if len(arg) == 0:
+            print("** class name missing **")
+            return
+        args = arg.split()
+        try:
+            class_name = args[0] 
+            if class_name not in globals():
+                print("** class doesn't exist **")
+                return
+            key = class_name + "." + args[1]
+        except IndexError:
+            print("** instance id missing **")
+            return
+        if not key in storage.all():
             print("** no instance found **")
-
-            
-
+            return 
+        for k, v in storage.all():
+            if (k == key):
+                del storage.all()[key]
+                storage.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
