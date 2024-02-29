@@ -65,8 +65,8 @@ class HBNBCommand(cmd.Cmd):
         if key in storage.all():
             print(storage.all()[key])
         else:
-            print("** no instance found **")           
-   
+            print("** no instance found **")
+
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
         if len(arg) == 0:
@@ -74,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
             return
         args = arg.split()
         try:
-            class_name = args[0] 
+            class_name = args[0]
             if class_name not in globals():
                 print("** class doesn't exist **")
                 return
@@ -82,9 +82,9 @@ class HBNBCommand(cmd.Cmd):
         except IndexError:
             print("** instance id missing **")
             return
-        if not key in storage.all():
+        if key not in storage.all():
             print("** no instance found **")
-            return 
+            return
         for k in storage.all():
             if (k == key):
                 del storage.all()[key]
@@ -92,21 +92,23 @@ class HBNBCommand(cmd.Cmd):
                 return
 
     def do_all(self, arg):
-        """Prints all string representation of all instances based or not on the class name."""
+        """
+        Prints all string representation of all instances
+        based or not on class name
+        """
         args = arg.split()
 
-        
         if len(arg) == 0:
             for value in storage.all().values():
                 print(value)
             return
 
-        class_name = args[0] 
-        
+        class_name = args[0]
+
         if class_name not in globals():
             print("** class doesn't exist **")
             return
-        
+
         for value in storage.all().values():
             if value.__class__.__name__ == class_name:
                 print(value)
@@ -118,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
             return
         args = arg.split()
         try:
-            class_name = args[0] 
+            class_name = args[0]
             if class_name not in globals():
                 print("** class doesn't exist **")
                 return
@@ -126,7 +128,7 @@ class HBNBCommand(cmd.Cmd):
         except IndexError:
             print("** instance id missing **")
             return
-        if not key in storage.all():
+        if key not in storage.all():
             print("** no instance found **")
             return
         if len(args) < 3:
@@ -140,9 +142,6 @@ class HBNBCommand(cmd.Cmd):
         attr_val = args[3]
         setattr(storage.all()[key], attr_name, attr_val)
         storage.save()
-
-
-
 
 
 if __name__ == '__main__':
