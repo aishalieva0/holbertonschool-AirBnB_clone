@@ -18,10 +18,10 @@ class FileStorage():
         return self.__objects
 
     def new(self, obj):
-        FileStorage.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
+        self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
 
     def save(self):
-        obj_dict = {key: obj.to_dict() for key, obj in FileStorage.__objects.items()}
+        obj_dict = {key: obj.to_dict() for key, obj in self.__objects.items()}
         with open(self.__file_path, "w") as file:
             json.dump(obj_dict, file)
 
