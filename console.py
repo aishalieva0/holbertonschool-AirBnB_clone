@@ -5,9 +5,8 @@ this is console
 
 
 import cmd
-from models import storage
 from models.base_model import BaseModel
-
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """ commands """
@@ -39,15 +38,28 @@ class HBNBCommand(cmd.Cmd):
             print(obj.id)
         except NameError:
             print("** class doesn't exist **")
-    """
-    def do_show(self, arg1, arg2):
-        if not arg1:
+
+    def do_show(self, arg):
+        if not arg:
             print("** class name missing **")
-        elif :
+            return
+        args = arg.split()
+        cls_name = args[0]
+
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+
+        if cls_name not in globals():
             print("** class doesn't exist **")
+            return
 
-    """     
-
+        key = "{}.{}".format(cls_name, args[1])
+        if key in storage.all():
+            print(storage.all()[key])
+        else:
+            print("** no instance found **")           
+   
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
         if len(arg) == 0:
