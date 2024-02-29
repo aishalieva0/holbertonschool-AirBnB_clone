@@ -32,13 +32,21 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, arg):
         if not arg:
             print("** class name missing **")
-        elif arg != "BaseModel":
-            print("** class doesn't exist **")
-        else:
-            obj = BaseModel()
+            return
+        try:
+            obj = eval(arg)()
             obj.save()
             print(obj.id)
+        except NameError:
+            print("** class doesn't exist **")
+"""
+    def do_show(self, arg1, arg2):
+        if not arg1:
+            print("** class name missing **")
+        elif :
+            print("** class doesn't exist **")
 
+"""     
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
