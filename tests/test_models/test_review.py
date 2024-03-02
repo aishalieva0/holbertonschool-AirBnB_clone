@@ -25,4 +25,4 @@ class TestReviewModel(unittest.TestCase):
         self.assertEqual(self.review.user_id, "1")
 
     def test_text(self):
-        self.assertEqual(self.review.text, "every thing was good")
+        self.assertEqual(self.review.text, "everything was good")
