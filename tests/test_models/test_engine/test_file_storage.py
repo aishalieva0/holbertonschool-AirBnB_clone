@@ -22,6 +22,10 @@ class TestFileStorage(unittest.TestCase):
         self.file_storage.new(self.model)
         self.assertEqual(len(self.file_storage.all()), 1)
 
+    def test_new(self):
+        self.file_storage.new(self.model)
+        self.assertIn('BaseModel.' + self.model.id, self.file_storage.all())
+
     def test_save(self):
         self.file_storage.new(self.model)
         self.file_storage.save()
