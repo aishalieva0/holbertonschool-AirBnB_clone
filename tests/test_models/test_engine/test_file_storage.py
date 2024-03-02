@@ -18,6 +18,7 @@ class TestFileStorage(unittest.TestCase):
             pass
 
     def test_all(self):
+        self.file_storage.new(self.model)
         self.assertEqual(len(self.file_storage.all()), 1)
 
     def test_save(self):
