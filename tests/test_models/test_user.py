@@ -13,6 +13,12 @@ class TestUserModel(unittest.TestCase):
     def setUp(self) -> None:
         self.usr = User()
 
+    def test_type(self):
+        self.assertIsInstance(User.email, str)
+        self.assertIsInstance(User.password, str)
+        self.assertIsInstance(User.first_name, str)
+        self.assertIsInstance(User.last_name, str)
+
     def test_email(self):
         self.usr.email = "hey@gmail.com"
         self.assertEqual(self.usr.email, "hey@gmail.com")
