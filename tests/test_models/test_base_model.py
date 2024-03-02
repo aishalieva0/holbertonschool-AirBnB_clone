@@ -28,5 +28,14 @@ class Test_BaseModel(unittest.TestCase):
         obj = BaseModel()
         self.assertIn(obj.id, str(obj))
 
+    def test_dict(self):
+        obj = BaseModel()
+        obj_d = obj.to_dict()
+
+        self.assertIsInstance(obj_d, dict)
+        self.assertEqual(obj_d['id'], obj.id)
+        self.assertEqual(obj_d['created_at'], obj.created_at.isoformat())
+        self.assertEqual(obj_d['updated_at'], obj.updated_at.isoformat())
+
 if __name__ == '__main__':
     unittest.main()
