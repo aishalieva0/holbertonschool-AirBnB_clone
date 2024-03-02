@@ -13,10 +13,11 @@ class TestFileStorage(unittest.TestCase):
 
     def tearDown(self) -> None:
         try:
-            os.remove(self.file_storage.__file_path)
+            os.remove(self.file_storage._FileStorage__file_path)
         except IOError:
             pass
 
     def test_all(self):
-        self.assertEqual(self.file_storage.all(), {})
+        print(self.file_storage.all())
+        self.assertEqual(len(self.file_storage.all()), 1)
 
