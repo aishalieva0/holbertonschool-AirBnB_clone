@@ -38,6 +38,6 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn('BaseModel.' + self.model.id, self.file_storage._FileStorage__objects)
 
     def test_file_path(self):
-        self.file_storage.new(self.obj)
+        self.file_storage.new(self.model)
         self.file_storage.save()
         self.assertTrue(os.path.exists(self.file_storage._FileStorage__file_path))
