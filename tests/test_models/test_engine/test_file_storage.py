@@ -18,6 +18,21 @@ class TestFileStorage(unittest.TestCase):
             pass
 
     def test_all(self):
-        print(self.file_storage.all())
         self.assertEqual(len(self.file_storage.all()), 1)
 
+    def test_save(self):
+        self.file_storage.new(self.model)
+        self.file_storage.save()
+        self.assertTrue(os.path.exists(self.file_storage._FileStorage__file_path))
+
+        with open(self.file_storage._FileStorage__file_path) as f:
+            data = json.load(f)
+            self.assertIn('BaseModel.' + self.model.id, data)
+
+    def test_reload(self):
+        self.file_storage.new(self.model)
+        self.file_storage.save()
+        self.file_storage._FileStorage__objects = {}
+        self.assertTrue(os.path.exists(self.file_storage._FileStorage__file_path))
+        self.file_storage.reload()
+        self.assertIn('BaseModel.' + self.model.id, self.file_storage._FileStorage__objects)
