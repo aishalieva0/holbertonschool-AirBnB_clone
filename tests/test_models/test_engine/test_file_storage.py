@@ -14,6 +14,7 @@ class TestFileStorage(unittest.TestCase):
     def tearDown(self) -> None:
         try:
             os.remove(self.file_storage._FileStorage__file_path)
+            self.file_storage._FileStorage__objects.clear()
         except IOError:
             pass
 
