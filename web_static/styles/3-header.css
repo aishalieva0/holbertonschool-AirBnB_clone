@@ -1,17 +1,6 @@
 header {
-    background-color: white;
+    background: white url(../images/logo.png) 20px no-repeat;
     height: 70px;
     width: 100%;
-    border-bottom: 1px #CCCCCC;
-    display: flex;
-    align-items: center;
-}
-
-.logo {
-    background-image: url(../images/logo.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 100px;
-    height: 50px;
-    margin-left: 20px;
+    border-bottom: 1px solid #CCCCCC;
 }
